@@ -29,9 +29,9 @@ module Alt
 
     def property_id
       suggestions = get('/locations/v2/auto-complete', input: input)[:autocomplete]
-      raise Error if suggestions.nil? || suggestions.empty?
+      raise Error if suggestions.nil? || suggestions.select{ it[:mpr_id] }.empty?
 
-      suggestions.first[:mpr_id]
+      suggestions.select{ it[:mpr_id] }.first[:mpr_id]
     end
 
     def input

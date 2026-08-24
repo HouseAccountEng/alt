@@ -1,3 +1,7 @@
+## [1.0.1] - 2026-08-24
+
+- [Fix] Raise Error when autocomplete doesn't return a valid address.
+
 ## [1.0.0] - 2026-08-05
 
 - Implement `Alt::Property#property_details`, which was previously a `# TODO` returning `nil`.
