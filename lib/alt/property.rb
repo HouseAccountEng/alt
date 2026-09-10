@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 # A wrapper for the Realtor API, reached through RapidAPI, to fetch property details.
 # @see https://rapidapi.com/apidojo/api/realty-in-us
 module Alt
   # Embeds the logic of a Realtor property.
   class Property
+    include Climate, Described, Detailed, Exterior, Grounds, Placed, Structure
+
     # The RapidAPI host serving the Realtor data.
     HOST = 'realty-in-us.p.rapidapi.com'
 
@@ -15,13 +19,15 @@ module Alt
       @data = data
     end
 
-    # @return [Hash] Details about the property
-    def property_details = details
+    # @return [Hash] every fact Realtor states about the property, named by what it is.
+    def facts = [climate, described, exterior, grounds, placed, structure].inject :merge
 
   private
 
-    def details
-      @details ||= fetch
+    def home = response.dig(:data, :home) || {}
+
+    def response
+      @response ||= fetch
     end
 
     # Realtor exposes no address-to-detail endpoint, so the address is resolved to an id first.
