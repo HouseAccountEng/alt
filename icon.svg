@@ -1,0 +1,12 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' role='img' aria-labelledby='icon-title'>
+<title id='icon-title'>alt: a white octagon barred in red, on a red tile.</title>
+<!--
+  The mark recalls HALT: a stop sign, which is what the gem does to everything Realtor
+  sends that is not a fact worth keeping. Solid shapes only, so the same drawing holds at
+  16 pixels in a tab and at 1024 as an avatar. Set `rx` to 0 for the Apple touch icon and
+  the avatar; iOS and every social network mask a corner of their own.
+-->
+<rect width='64' height='64' rx='14' fill='#D40000'/>
+<polygon points='54.2,41.2 41.2,54.2 22.8,54.2 9.8,41.2 9.8,22.8 22.8,9.8 41.2,9.8 54.2,22.8' fill='#FFFFFF'/>
+<rect x='16' y='28.5' width='32' height='7' fill='#D40000'/>
+</svg>

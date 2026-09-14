@@ -1,0 +1,15 @@
+{
+  "name": "alt — a Ruby client for the Realtor API",
+  "short_name": "alt",
+  "description": "alt fetches the facts Realtor states about a home, each named by what it is, and nothing else Realtor sends.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "theme_color": "#D40000",
+  "background_color": "#FFFFFF",
+  "icons": [
+    { "src": "web-app-manifest-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "web-app-manifest-512x512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

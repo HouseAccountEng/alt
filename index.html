@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>alt — a Ruby client for the Realtor API</title>
+<meta name='description' content='alt fetches the facts Realtor states about a home, each named by what it is, and nothing else Realtor sends.'>
+<!-- All rendered from icon.svg by build-icons.sh; nothing on this page is fetched from anywhere else. -->
+<link rel='icon' href='icon.svg' type='image/svg+xml'>
+<link rel='icon' href='favicon-96x96.png' type='image/png' sizes='96x96'>
+<link rel='icon' href='favicon.ico' sizes='16x16 32x32 48x48'>
+<link rel='apple-touch-icon' href='apple-touch-icon.png' sizes='180x180'>
+<link rel='manifest' href='site.webmanifest'>
+<meta name='apple-mobile-web-app-title' content='alt'>
+<meta name='theme-color' content='#FFFFFF' media='(prefers-color-scheme: light)'>
+<meta name='theme-color' content='#000000' media='(prefers-color-scheme: dark)'>
+<style>
+/* Black on white, one red, one rule weight, one grid. Nothing moves. */
+:root {
+  --bg: #FFFFFF;
+  --ink: #000000;
+  --ink-soft: #555555;
+  --rule: #000000;
+  --red: #D40000;
+  --code-bg: #F2F2F2;
+  --font: 'Helvetica Neue', Helvetica, Inter, system-ui, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --ink: #FFFFFF;
+    --ink-soft: #AAAAAA;
+    --rule: #FFFFFF;
+    --red: #FF2A2A;
+    --code-bg: #111111;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1rem/1.5 var(--font);
+  padding: 0 1.5rem 4rem;
+}
+a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+a:hover, a:focus-visible { color: var(--red); outline: none; }
+code { font: 0.9375em/1.5 var(--mono); }
+p code { background: var(--code-bg); padding: 0 0.25em; }
+pre {
+  margin: 0;
+  padding: 1rem;
+  background: var(--code-bg);
+  border-left: 3px solid var(--rule);
+  overflow-x: auto;
+  font: 0.875rem/1.55 var(--mono);
+}
+pre .c { color: var(--ink-soft); }
+.wrap { max-width: 72rem; margin: 0 auto; }
+
+/* Header */
+header {
+  border-bottom: 3px solid var(--rule);
+  padding: 2rem 0 1.5rem;
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  column-gap: 1.5rem;
+  align-items: start;
+}
+header img { width: 4rem; height: 4rem; display: block; }
+header > div { min-width: 0; }
+header h1 {
+  margin: -0.15em 0 0;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+header .tagline { margin: 0.75rem 0 0; font-size: 1.25rem; }
+header .meta {
+  margin: 1rem 0 0;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+header .meta a { margin-right: 1.25rem; white-space: nowrap; }
+header .meta .v { color: var(--red); }
+
+/* Sections: a numbered label on the left, the content on the right. */
+section {
+  border-top: 1px solid var(--rule);
+  padding: 1.5rem 0 2rem;
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  column-gap: 1.5rem;
+}
+section > h2 {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+section > h2 .n { color: var(--red); font-variant-numeric: tabular-nums; }
+section > div { grid-column: 2; max-width: 44rem; min-width: 0; }
+section p { margin: 1rem 0 0; }
+section h2 + div p:first-child { margin-top: 0.75rem; }
+section pre { margin-top: 1rem; }
+dl { margin: 0.75rem 0 0; }
+dt { font-weight: 700; margin-top: 1rem; }
+dd { margin: 0.25rem 0 0; }
+
+footer {
+  border-top: 3px solid var(--rule);
+  padding: 1rem 0 0;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+footer a { margin-right: 1.25rem; white-space: nowrap; }
+
+@media (max-width: 40rem) {
+  header, section, section > h2 { grid-template-columns: 1fr; }
+  header img { width: 3rem; height: 3rem; margin-bottom: 1rem; }
+  section > div { grid-column: 1; }
+  section > h2 { display: flex; gap: 0.75rem; }
+}
+</style>
+</head>
+<body>
+<div class='wrap'>
+
+<header>
+  <img src='icon.svg' alt='' width='64' height='64'>
+  <div>
+    <h1>alt</h1>
+    <p class='tagline'>A Ruby client for the Realtor API.</p>
+    <p class='meta'>Ruby gem &middot; <span class='v'>2.0.0</span> &middot; MIT &middot; <a href='https://github.com/HouseAccountEng/alt'>Source</a> <a href='https://rubydoc.info/gems/alt'>Reference</a> <a href='https://rubygems.org/gems/alt'>RubyGems</a></p>
+  </div>
+</header>
+
+<main>
+
+<section id='what'>
+  <h2><span class='n'>01</span><span>What it does</span></h2>
+  <div>
+    <p>Give it a street address. It answers the facts Realtor states about that home, reached through <a href='https://rapidapi.com/apidojo/api/realty-in-us'>RapidAPI</a>: the numbers, the choices and the presence flags, each named by what it is.</p>
+<pre><code>property = Alt::Property.new address: '4352 Desert Park Ave', unit: nil,
+  city: 'North Las Vegas', zipcode: '89085'
+
+property.facts
+<span class='c'># => { "Lot size" => 0.1837, "Living area" => 3000, "Bedrooms" => 5,
+#      "Bathrooms" => 2, "Year built" => 1999, "Stories" => 2,
+#      "Garage spaces" => 3, "Fireplaces" => 2,
+#      "Property type" => "Single family", "Heating system" => "Forced air",
+#      "Heating fuel" => "Natural gas", "Cooling" => "Central air",
+#      "Roof" => "Asphalt shingle", "Construction" => "Brick",
+#      "Sewer" => "Public", "Foundation" => "Slab", "Pool" => "Yes",
+#      "Outdoor living" => "Yes", "Fence" => "Yes", "Sprinklers" => "Yes",
+#      "Coordinate" => [36.2814, -115.1543] }</span></code></pre>
+    <p>Realtor has no address-to-detail endpoint, so one call is two requests: <code>/locations/v2/auto-complete</code> resolves the address to a property id, and <code>/properties/v3/detail</code> answers the details. <code>Alt::Error</code> is raised when either fails, or when the address matches no property.</p>
+  </div>
+</section>
+
+<section id='why'>
+  <h2><span class='n'>02</span><span>How it benefits you</span></h2>
+  <div>
+    <dl>
+      <dt>One name per fact.</dt>
+      <dd>Listings are written in whichever dialect their MLS uses. <code>Warm Air</code>, <code>Forced Air</code> and <code>ForcedAir</code> all answer <code>Forced air</code>. <code>Forced Air, Natural Gas</code> answers a heating system and a heating fuel. Anything the mapping does not name answers <code>Other</code>. The options were derived from 329 real enrichments, since the API's documentation does not describe these fields.</dd>
+      <dt>Nothing invented.</dt>
+      <dd>A fact the listing does not state is left out, never answered as a zero or a <code>false</code>. The response cannot tell &ldquo;no pool&rdquo; from &ldquo;no mention of a pool&rdquo;, and a value that says the second while meaning the first is worse than no value at all.</dd>
+      <dt>Nothing leaked.</dt>
+      <dd>Realtor also sends the street, an <code>href</code> whose slug is the address, the listing agent's name, email and phones, and a Street View URL carrying a live Maps key. An allow-list keeps all of it out. <code>Coordinate</code> is the one entry not meant for storage: pin the home on a map with it and drop it, since a precise coordinate kept beside a street address is personal data.</dd>
+      <dt>Nothing else to depend on.</dt>
+      <dd>The standard library and one file of Active Support. Ruby 3.2 or later.</dd>
+    </dl>
+  </div>
+</section>
+
+<section id='install'>
+  <h2><span class='n'>03</span><span>How to install</span></h2>
+  <div>
+    <p>System-wide:</p>
+<pre><code>gem install alt</code></pre>
+    <p>Or in a Gemfile, pinned to the current major:</p>
+<pre><code>gem 'alt', '~> 2.0'</code></pre>
+    <p><code>~> major.minor</code> means <code>bundle update</code> never crosses a breaking change.</p>
+    <p>Subscribe to the Realtor API on RapidAPI and set the key as <code>ENV['RAPIDAPI_KEY']</code>. The host, <code>realty-in-us.p.rapidapi.com</code>, is sent as <code>X-RapidAPI-Host</code> for you.</p>
+  </div>
+</section>
+
+<section id='license'>
+  <h2><span class='n'>04</span><span>License</span></h2>
+  <div>
+    <p>MIT. Copyright &copy; 2026 HouseAccount. Use it, copy it, change it, sell it; keep the notice. The <a href='https://github.com/HouseAccountEng/alt/blob/main/LICENSE.txt'>full text</a> is in the repository.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a href='https://github.com/HouseAccountEng/alt'>Source</a> <a href='https://rubydoc.info/gems/alt'>Reference</a> <a href='https://github.com/HouseAccountEng/alt/blob/main/CHANGELOG.md'>Changelog</a>
+</footer>
+
+</div>
+</body>
+</html>
